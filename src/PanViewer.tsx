@@ -120,6 +120,21 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
     );
   };
 
+  public componentDidUpdate(prevProps: any) {
+    const { image } = this.props;
+    const { image: prevImage } = prevProps;
+
+    // reset state when changing images
+    if (image !== prevImage) {
+      this.setState({
+        dx: 0,
+        dy: 0,
+        zoom: 1,
+        rotation: 0,
+      });
+    }
+  }
+
   public render() {
     const StyledReactPanZoom = styled(ReactPanZoom)`
       ${Container};

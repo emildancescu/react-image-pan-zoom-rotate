@@ -10,6 +10,7 @@ declare class PanViewer extends React.Component<{
         rotation: number;
     };
     renderPanZoomControls: () => JSX.Element;
+    componentDidUpdate(prevProps: any): void;
     render(): JSX.Element[];
     zoomIn: () => void;
     zoomOut: () => void;
