@@ -53,7 +53,7 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
   // tslint:disable-next-line: member-ordering
   public renderPanZoomControls = () => {
     return (
-      <ControlsContainer>
+      <ControlsContainer key="controls">
         <div onClick={this.zoomIn}>
           <svg
             width="24"
@@ -132,7 +132,7 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
         pandy={this.state.dy}
         onPan={this.onPan}
         rotation={this.state.rotation}
-        key={this.state.dx}
+        key="panzoom"
       >
         <img
           style={{
