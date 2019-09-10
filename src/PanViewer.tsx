@@ -64,13 +64,13 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
           >
             <path
               d="M4 12H20"
-              stroke="#4C68C1"
+              stroke="#0190fe"
               strokeWidth="2"
               strokeLinecap="round"
             />
             <path
               d="M12 4L12 20"
-              stroke="#4C68C1"
+              stroke="#0190fe"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -86,7 +86,7 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
           >
             <path
               d="M4 12H20"
-              stroke="#4C68C1"
+              stroke="#0190fe"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -102,14 +102,14 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
           >
             <path
               d="M14 15L9 20L4 15"
-              stroke="#4C68C1"
+              stroke="#0190fe"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M20 4H13C10.7909 4 9 5.79086 9 8V20"
-              stroke="#4C68C1"
+              stroke="#0190fe"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -119,17 +119,7 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
       </ControlsContainer>
     );
   };
-  public componentDidMount() {
-    document.addEventListener('keypress', e => {
-      if (e.keyCode === 43 || e.keyCode === 61) {
-        this.zoomIn();
-      } else if (e.keyCode === 45) {
-        this.zoomOut();
-      } else if (e.keyCode === 114 || e.keyCode === 82) {
-        this.rotateLeft();
-      }
-    });
-  }
+
   public render() {
     const StyledReactPanZoom = styled(ReactPanZoom)`
       ${Container};
