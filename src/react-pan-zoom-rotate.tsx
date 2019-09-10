@@ -75,6 +75,11 @@ export default class ReactPanZoom extends React.PureComponent<
   // tslint:disable-next-line: member-ordering
   public state = this.getInitialState();
 
+  constructor(props: any) {
+    super(props);
+    this.panWrapper = React.createRef();
+  }
+
   // tslint:disable-next-line: member-ordering
   public componentWillReceiveProps(nextProps: IReactPanZoomProps) {
     const { matrixData } = this.state;
@@ -119,10 +124,14 @@ export default class ReactPanZoom extends React.PureComponent<
   // tslint:disable-next-line: member-ordering
   public onTouchMove = (e: React.TouchEvent<EventTarget>) => {
     e.preventDefault();
+    e.stopPropagation();
     this.updateMousePosition(e.touches[0].pageX, e.touches[0].pageY);
   };
 
   public componentDidMount() {
+    this.panWrapper.current.ontouchstart = this.onTouchStart;
+    this.panWrapper.current.ontouchmove = this.onTouchMove;
+
     document.addEventListener('touchend', this.onTouchEnd);
     document.addEventListener('mouseup', this.onMouseUp);
   }
@@ -138,10 +147,6 @@ export default class ReactPanZoom extends React.PureComponent<
       <div
         className={`pan-container ${this.props.className || ''}`}
         onMouseDown={this.onMouseDown}
-        onMouseUp={this.onMouseUp}
-        onTouchStart={this.onTouchStart}
-        onTouchMove={this.onTouchMove}
-        onTouchEnd={this.onTouchEnd}
         onMouseMove={this.onMouseMove}
         onClick={this.onClick}
         style={{
@@ -149,7 +154,7 @@ export default class ReactPanZoom extends React.PureComponent<
           userSelect: 'none',
           width: this.props.width,
         }}
-        ref={ref => (this.panWrapper = ref)}
+        ref={this.panWrapper}
       >
         <div
           ref={ref => (ref ? (this.panContainer = ref) : null)}
@@ -189,10 +194,9 @@ export default class ReactPanZoom extends React.PureComponent<
       mouseDown: true,
     });
     if (this.panWrapper) {
-      this.panWrapper.style.cursor = 'move';
+      this.panWrapper.current.style.cursor = 'move';
     }
     event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
     event.preventDefault();
   };
 
@@ -206,7 +210,7 @@ export default class ReactPanZoom extends React.PureComponent<
       mouseDown: false,
     });
     if (this.panWrapper) {
-      this.panWrapper.style.cursor = '';
+      this.panWrapper.current.style.cursor = '';
     }
     if (this.props.onPan) {
       this.props.onPan(this.state.matrixData[4], this.state.matrixData[5]);

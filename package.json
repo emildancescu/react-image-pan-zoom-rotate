@@ -17,7 +17,7 @@
     "react pan zoom rotate"
   ],
   "scripts": {
-    "start:dev": "webpack-dev-server",
+    "start:dev": "webpack-dev-server --host 0.0.0.0",
     "lib:build": "webpack --config=webpack.config.lib.js",
     "test": "jest --watchAll --coverage",
     "itest": "cypress open",

@@ -44,6 +44,7 @@ export default class ReactPanZoom extends React.PureComponent<IReactPanZoomProps
         matrixData: number[];
         mouseDown: boolean;
     };
+    constructor(props: any);
     componentWillReceiveProps(nextProps: IReactPanZoomProps): void;
     reset: () => void;
     onClick: (e: React.MouseEvent<EventTarget>) => void;
