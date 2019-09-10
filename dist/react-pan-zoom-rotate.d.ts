@@ -50,6 +50,8 @@ export default class ReactPanZoom extends React.PureComponent<IReactPanZoomProps
     onTouchStart: (e: React.TouchEvent<EventTarget>) => void;
     onTouchEnd: (e: any) => void;
     onTouchMove: (e: React.TouchEvent<EventTarget>) => void;
+    componentDidMount(): void;
+    componentWillUnmount(): void;
     render(): JSX.Element;
     private onMouseDown;
     private panStart;

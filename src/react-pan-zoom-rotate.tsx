@@ -118,8 +118,19 @@ export default class ReactPanZoom extends React.PureComponent<
   };
   // tslint:disable-next-line: member-ordering
   public onTouchMove = (e: React.TouchEvent<EventTarget>) => {
+    e.preventDefault();
     this.updateMousePosition(e.touches[0].pageX, e.touches[0].pageY);
   };
+
+  public componentDidMount() {
+    document.addEventListener('touchend', this.onTouchEnd);
+    document.addEventListener('mouseup', this.onMouseUp);
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener('touchend', this.onTouchEnd);
+    document.removeEventListener('mouseup', this.onMouseUp);
+  }
 
   // tslint:disable-next-line: member-ordering
   public render() {
@@ -185,7 +196,7 @@ export default class ReactPanZoom extends React.PureComponent<
     event.preventDefault();
   };
 
-  private onMouseUp = (e: React.MouseEvent<EventTarget>) => {
+  private onMouseUp = (e: any) => {
     this.panEnd(e);
   };
   private panEnd = (e: React.MouseEvent<EventTarget>) => {
